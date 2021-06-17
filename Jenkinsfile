@@ -2,7 +2,7 @@ pipeline {
     agent { label "master" }
     environment {
         ECR_REGISTRY = "046402772087.dkr.ecr.us-east-1.amazonaws.com"
-        APP_REPO_NAME= "clarusway-repo/todo-app"
+        APP_REPO_NAME= "clarusway/serdar"
     }
     stages {
         stage('Build Docker Image') {
