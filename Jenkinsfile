@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Push Image to ECR Repo') {
             steps {
-		sh 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) $ECR_REGISTRY
+		sh 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) "$ECR_REGISTRY"'
                 sh 'docker push "$ECR_REGISTRY/$APP_REPO_NAME:latest"'
             }
         }
