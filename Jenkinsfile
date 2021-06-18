@@ -18,6 +18,13 @@ pipeline {
                 sh 'docker push "$ECR_REGISTRY/$APP_REPO_NAME:latest"'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "$ECR_REGISTRY"'
+                sh 'docker pull "$ECR_REGISTRY/$APP_REPO_NAME:latest"'
+                sh 'docker run --name todo -dp 80:3000 "$ECR_REGISTRY/$APP_REPO_NAME:latest"'
+            }
+        }
     }
     post {
         always {
