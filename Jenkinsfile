@@ -7,9 +7,6 @@ pipeline {
                     image 'node:12-alpine'
                 }
             }
-            environment {
-       		 HOME = '.'
-            }	
             steps{
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'yarn install --production'
