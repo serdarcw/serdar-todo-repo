@@ -29,8 +29,10 @@ pipeline{
                 }
             }
             steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'python -m pytest -v         --junit-xml results.xml src/appTest.py'
+                withEnv(["HOME=${env.WORKSPACE}", 'MYSQL_DATABASE_PASSWORD=Clarusway']) {
+                    sh 'echo $MYSQL_DATABASE_HOST'
+                    sh 'echo $MYSQL_DATABASE_PASSWORD'
+                    sh 'python -m pytest -v --junit-xml results.xml src/appTest.py'
                 }
             }
             post {
