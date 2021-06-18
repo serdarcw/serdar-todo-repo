@@ -30,7 +30,8 @@ pipeline{
             }
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'nohup python app.py &'
+                    // önce çalıştırıp tablonun oluşması için
+                    sh 'nohup python app.py &' 
                     sh 'python -m pytest -v --junit-xml results.xml src/appTest.py'
                 }
             }
@@ -40,5 +41,11 @@ pipeline{
                 }
             }
         }
+        stage('build'){
+            agent any
+                steps{
+                    sh "docker build -t 046402772087.dkr.ecr.us-east-1.amazonaws.com/serdar/hands-on-jenkins:latest ."
+                }
+            }
     }
 }
