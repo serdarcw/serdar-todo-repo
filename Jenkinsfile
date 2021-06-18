@@ -1,5 +1,8 @@
 pipeline {
     agent { label "master" }
+    environment {
+        HOME = '.'
+    }
     stages {
         stage("compile"){
             agent{
