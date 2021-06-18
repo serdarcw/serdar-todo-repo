@@ -2,6 +2,7 @@ pipeline {
     agent { label "master" }
     environment {
         HOME = '.'
+        PATH="/usr/local/bin/:${env.PATH}"
     }
     stages {
         stage("compile"){
