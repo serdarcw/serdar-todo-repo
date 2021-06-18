@@ -13,11 +13,17 @@ pipeline {
         }
         stage('Push Image to ECR Repo') {
             steps {
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com"
-		sh 'docker push "$ECR_REGISTRY/$APP_REPO_NAME:latest"'
+		script {
+	          docker.withRegistry(
+		     '046402772087.dkr.ecr.us-east-1.amazonaws.com',
+                     'ecr:us-east-1:my_aws_credentials') {
+                     def myImage = docker.build('/clarusway/serdar')
+		     myImage.pusg('latest')	
+		   }
+                }
             }
         }
-    }
+     } 
     post {
         always {
             echo 'Deleting all local images'
