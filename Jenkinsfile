@@ -1,9 +1,5 @@
 pipeline {
     agent { label "master" }
-    environment {
-        HOME = '.'
-        PATH="/usr/local/bin/:${env.PATH}"
-    }
     stages {
         stage("compile"){
             agent{
@@ -11,6 +7,9 @@ pipeline {
                     image 'node:12-alpine'
                 }
             }
+            environment {
+       		 HOME = '.'
+            }	
             steps{
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'yarn install --production'
