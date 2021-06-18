@@ -14,7 +14,7 @@ services:
         networks:
             - clarusnet
     app:
-        image: 046402772087.dkr.ecr.us-east-1.amazonaws.com/serdarcw/myhandson:latest
+        image: 046402772087.dkr.ecr.us-east-1.amazonaws.com/serdar/hands-on-jenkins:latest
         restart: always
         environment:
             MYSQL_DATABASE_HOST: database
