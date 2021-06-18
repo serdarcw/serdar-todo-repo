@@ -6,7 +6,7 @@ pipeline{
         MYSQL_DATABASE_USER = "admin"
         MYSQL_DATABASE_DB = "phonebook"
         MYSQL_DATABASE_PORT = 3306
-        PATH="/usr/local/bin/:${env.PATH}
+        PATH="/usr/local/bin/:${env.PATH}"
     }
     stages{
         stage("compile"){
