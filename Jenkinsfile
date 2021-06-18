@@ -18,7 +18,7 @@ pipeline {
 		     '046402772087.dkr.ecr.us-east-1.amazonaws.com',
                      'ecr:us-east-1:my_aws_credentials') {
                      def myImage = docker.build('/clarusway/serdar')
-		     myImage.pusg('latest')	
+		     myImage.push('latest')	
 		   }
                 }
             }
