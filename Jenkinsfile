@@ -14,7 +14,7 @@ pipeline {
             }
             steps{
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'yarn install --production'
+                    sh 'yarn install'
                     sh 'npm install'
                 }   
             }
@@ -33,6 +33,9 @@ pipeline {
         }
     }
     post {
+        success {
+            echo 'You did it. You are gonna be a good Devops'
+        }
         always {
             echo 'Deleting all local images'
             sh 'docker image prune -af'
