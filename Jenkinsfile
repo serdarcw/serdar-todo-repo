@@ -1,12 +1,12 @@
 pipeline {
     agent { label "master" }
     environment {
-        ECR_REGISTRY = "46402772087.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "046402772087.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway-repo/todo-app"
         PATH="/usr/local/bin/:${env.PATH}"        
     }
     stages {
-        stage("running app on Docker"){
+        stage("running app on Docker "){
             agent{
                 docker{
                     image 'node:12-alpine'
@@ -21,14 +21,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build --force-rm -t "$ECR_REGISTRY/$APP_REPO_NAME" .' 
+                sh 'docker build --force-rm -t "046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app" .' 
                 sh 'docker image ls'
             }
         }
         stage('Push Image to ECR Repo') {
             steps {
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGISTRY'
-                sh 'docker push $ECR_REGISTRY/$APP_REPO_NAME:latest'
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com'
+                sh 'docker push 046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest'
             }
         }
     }
